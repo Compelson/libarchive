@@ -17,6 +17,7 @@
 .deps/
 .libs/
 bin/
+external/
 out/
 .dirstamp
 Makefile
