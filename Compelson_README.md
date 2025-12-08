@@ -8,7 +8,7 @@ The following libraries must be built from source:
 - [BZip2](https://github.com/Compelson/bzip2)
 - [LibLZMA (XZ Utils)](https://github.com/Compelson/xz)
 - [LZ4](https://github.com/Compelson/lz4)
-- [ZSTD](https://github.com/Compelson/zst)
+- [ZSTD](https://github.com/Compelson/zstd)
 
 Additional prebuilt libraries required from `ME_SUPPORT`:
 - ZLIB
