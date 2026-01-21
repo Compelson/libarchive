@@ -52,7 +52,7 @@ Copy the artifacts from step 1 into the matching folders:
 
 Ensure the include directory structure matches CMake expectations.
 
-Next, copy **ZLIB**, **OpenSSL**, and **Expat** from `ME_SUPPORT` into the same structure and rename the files if needed so CMake can detect them (`zlib.lib`, `libssl.lib`, `expat.lib`, etc.). See this [Example Script](#example-script-for-copying-external-libraries).
+Next, copy **ZLIB**, **OpenSSL**, and **Expat** from `ME_SUPPORT` into the same structure and rename the files if needed so CMake can detect them (`zlib.lib`, `libssl.lib`, `expat.lib`, etc.).
 
 ## 4. Configure and Build libarchive
 
@@ -60,79 +60,3 @@ Next, copy **ZLIB**, **OpenSSL**, and **Expat** from `ME_SUPPORT` into the same 
 2. Configure the project (Debug, Release). 
 3. Verify that CMake detects all dependencies.
 4. Build and install the project (Debug, Release).
-
-
-## Example Script for Copying External Libraries
-
-```cmd
-@ECHO OFF
-echo Configuring libarchive for MOBILedit
-
-setlocal
-setlocal ENABLEEXTENSIONS
-
-cd %~dp0
-
-set BZIP2="..\bzip2"
-set XZ="..\xz"
-set LZ4="..\lz4\build\cmake"
-set ZSTD="..\zstd\build\cmake"
-
-set EXTERNAL="external\"
-mkdir "%EXTERNAL%\include"
-mkdir "%EXTERNAL%\lib"
-mkdir "%EXTERNAL%\include"
-mkdir "%EXTERNAL%\lib"
-
-REM ZLIB
-xcopy /V /Y "%ME_SUPPORT%\Include\zlib\*.*" "%EXTERNAL%\include\"
-copy  /V /Y "%ME_SUPPORT%\Lib\zlib1x64vc143.lib" "%EXTERNAL%\lib\zlib.lib"
-copy  /V /Y "%ME_SUPPORT%\Lib\zlib1x64vc143d.lib" "%EXTERNAL%\lib\zlibd.lib"
-
-REM EXPAT
-xcopy /V /Y "%ME_SUPPORT%\Include\expat\*.*" "%EXTERNAL%\include\"
-copy  /V /Y "%ME_SUPPORT%\Lib\libExpatx64vc143.lib" "%EXTERNAL%\lib\libexpat.lib"
-copy  /V /Y "%ME_SUPPORT%\Lib\libExpatx64vc143.pdb" "%EXTERNAL%\lib\libexpat.pdb"
-copy  /V /Y "%ME_SUPPORT%\Lib\libExpatx64vc143d.lib" "%EXTERNAL%\lib\libexpatd.lib"
-copy  /V /Y "%ME_SUPPORT%\Lib\libExpatx64vc143d.pdb" "%EXTERNAL%\lib\libexpatd.pdb"
-
-REM OPENSSL
-xcopy /V /Y "%ME_SUPPORT%\Include\OpenSSL\*.*" "%EXTERNAL%\include\openssl\" 
-copy  /V /Y "%ME_SUPPORT%\Lib\libcrypto-1_1x64vc143.lib" "%EXTERNAL%\lib\libcrypto.lib"
-copy  /V /Y "%ME_SUPPORT%\Lib\libssl-1_1x64vc143.lib" "%EXTERNAL%\lib\libssl.lib"
-copy  /V /Y "%ME_SUPPORT%\Lib\libcrypto-1_1x64vc143d.lib" "%EXTERNAL%\lib\libcryptod.lib"
-copy  /V /Y "%ME_SUPPORT%\Lib\libssl-1_1x64vc143d.lib" "%EXTERNAL%\lib\libssld.lib"
-
-REM BZ2
-copy /V /Y "%BZIP2%\out\install\windows-x64-debug\include\bzlib.h" "%EXTERNAL%\include\bzlib.h"
-copy /V /Y "%BZIP2%\out\install\windows-x64-debug\lib\bz2_static.lib" "%EXTERNAL%\lib\bz2d.lib"
-copy /V /Y "%BZIP2%\out\install\windows-x64-debug\lib\bz2_static.pdb" "%EXTERNAL%\lib\bz2d.pdb"
-copy /V /Y "%BZIP2%\out\install\windows-x64-release\lib\bz2_static.lib" "%EXTERNAL%\lib\bz2.lib"
-copy /V /Y "%BZIP2%\out\install\windows-x64-release\lib\bz2_static.pdb" "%EXTERNAL%\lib\bz2.pdb"
-
-REM XZ
-xcopy /V /Y "%XZ%\out\install\windows-x64-debug\include\lzma\*.*" "%EXTERNAL%\include\lzma\" 
-copy  /V /Y "%XZ%\out\install\windows-x64-debug\include\lzma.h" "%EXTERNAL%\include\lzma.h"
-copy  /V /Y "%XZ%\out\install\windows-x64-debug\lib\lzma.lib" "%EXTERNAL%\lib\lzmad.lib"
-copy  /V /Y "%XZ%\out\install\windows-x64-debug\lib\lzma.pdb" "%EXTERNAL%\lib\lzmad.pdb"
-copy  /V /Y "%XZ%\out\install\windows-x64-release\lib\lzma.lib" "%EXTERNAL%\lib\lzma.lib"
-copy  /V /Y "%XZ%\out\install\windows-x64-release\lib\lzma.pdb" "%EXTERNAL%\lib\lzma.pdb"
-
-REM LZ4
-xcopy /V /Y "%LZ4%\out\install\windows-x64-debug\include\*.*" "%EXTERNAL%\include\" 
-copy  /V /Y "%LZ4%\out\install\windows-x64-debug\lib\lz4.lib" "%EXTERNAL%\lib\lz4d.lib"
-copy  /V /Y "%LZ4%\out\install\windows-x64-debug\lib\lz4.pdb" "%EXTERNAL%\lib\lz4d.pdb"
-copy  /V /Y "%LZ4%\out\install\windows-x64-release\lib\lz4.lib" "%EXTERNAL%\lib\lz4.lib"
-copy  /V /Y "%LZ4%\out\install\windows-x64-release\lib\lz4.pdb" "%EXTERNAL%\lib\lz4.pdb"
-
-REM ZSTD
-xcopy /V /Y "%ZSTD%\out\install\windows-x64-debug\include\*.*" "%EXTERNAL%\include\" 
-copy  /V /Y "%ZSTD%\out\install\windows-x64-debug\lib\zstd_static.lib" "%EXTERNAL%\lib\zstdd.lib"
-copy  /V /Y "%ZSTD%\out\install\windows-x64-debug\lib\zstd_static.pdb" "%EXTERNAL%\lib\zstdd.pdb"
-copy  /V /Y "%ZSTD%\out\install\windows-x64-release\lib\zstd_static.lib" "%EXTERNAL%\lib\zstd.lib"
-copy  /V /Y "%ZSTD%\out\install\windows-x64-release\lib\zstd_static.pdb" "%EXTERNAL%\lib\zstd.pdb"
-
-endlocal
-echo.
-echo libarchive configure done
-```
