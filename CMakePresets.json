@@ -12,11 +12,9 @@
       "generator": "Ninja",
       "hidden": true,
       "cacheVariables": {
-        "CMAKE_PREFIX_PATH": "${sourceDir}\\external",
         "CMAKE_C_COMPILER": "cl.exe",
         "CMAKE_CXX_COMPILER": "cl.exe",
         "CMAKE_C_FLAGS": "-DXML_STATIC",
-        "CMAKE_DEBUG_POSTFIX": "d",
         "ENABLE_TAR": false,
         "ENABLE_CPIO": false,
         "ENABLE_CAT": false,
@@ -39,7 +37,8 @@
       "displayName": "x64-Release",
       "inherits": "windows-x64",
       "cacheVariables": {
-        "CMAKE_BUILD_TYPE": "RelWithDebInfo"
+        "CMAKE_BUILD_TYPE": "RelWithDebInfo",
+        "CMAKE_PREFIX_PATH": "${sourceDir}\\external\\release"
       }
     },
     {
@@ -47,7 +46,9 @@
       "displayName": "x64-Debug",
       "inherits": "windows-x64",
       "cacheVariables": {
-        "CMAKE_BUILD_TYPE": "Debug"
+        "CMAKE_BUILD_TYPE": "Debug",
+        "CMAKE_PREFIX_PATH": "${sourceDir}\\external\\debug",
+        "CMAKE_DEBUG_POSTFIX": "d"
       }
     }
   ],
