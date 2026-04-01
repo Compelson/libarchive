@@ -47,8 +47,7 @@
       "inherits": "windows-x64",
       "cacheVariables": {
         "CMAKE_BUILD_TYPE": "Debug",
-        "CMAKE_PREFIX_PATH": "${sourceDir}\\external\\debug",
-        "CMAKE_DEBUG_POSTFIX": "d"
+        "CMAKE_PREFIX_PATH": "${sourceDir}\\external\\debug"
       }
     }
   ],
